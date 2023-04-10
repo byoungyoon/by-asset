@@ -21,6 +21,11 @@ export default [
         format: "esm",
       },
     ],
+    onwarn: (warning) => {
+      if (warning.code === "THIS_IS_UNDEFINED") {
+        return;
+      }
+    },
     plugins: [
       resolve(),
       commonjs(),
