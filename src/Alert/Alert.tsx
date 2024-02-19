@@ -91,6 +91,11 @@ const Container = styled.div<{ type: AlertTypeEnum }>`
   word-break: break-all;
   position: relative;
 
+  @media (max-width: 500px) {
+    width: 90dvw;
+    min-width: min-content;
+  }
+
   & .title {
     font-weight: 600;
     font-size: 1.1em;
