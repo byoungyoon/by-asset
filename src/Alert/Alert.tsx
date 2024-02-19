@@ -5,8 +5,8 @@ import {
   AiFillCloseCircle,
   AiFillWarning,
   AiOutlineClose,
-  BsFillInfoCircleFill,
-} from "react-icons/all";
+} from "react-icons/ai";
+import { BsFillInfoCircleFill } from "react-icons/bs";
 
 export const alertTypeEnum = {
   SUCCESS: "success",
@@ -65,8 +65,8 @@ type ColorTypes = {
 
 const COLOR = {
   [alertTypeEnum.SUCCESS]: {
-    bg: "#dcfce7",
-    color: "#4d7c0f",
+    bg: "#F1FFFF",
+    color: "#43ACA7",
   },
   [alertTypeEnum.INFO]: {
     bg: "#dbeafe",

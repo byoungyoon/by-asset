@@ -105,7 +105,7 @@ type ColorTypes = {
 
 const COLOR = {
   [alertTypeEnum.SUCCESS]: {
-    bar: "#4d7c0f",
+    bar: "#43ACA7",
   },
   [alertTypeEnum.INFO]: {
     bar: "#2563eb",
