@@ -27,8 +27,8 @@ export default function Sakura(props: SakuraProps) {
 
   return (
     <Container id="sakura" ref={ref}>
-      {Array.from(Array(maxTotal).keys()).map(() => (
-        <Petal options={options} />
+      {Array.from(Array(maxTotal).keys()).map((key) => (
+        <Petal key={key} options={options} />
       ))}
       {children}
     </Container>
