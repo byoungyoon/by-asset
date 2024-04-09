@@ -1,6 +1,6 @@
 {
   "name": "@byoungyoon/by-asset",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "A Component Library for Building React Applications faster",
   "scripts": {
     "build": "rollup -c",
@@ -31,6 +31,7 @@
     "@storybook/react-webpack5": "^7.0.2",
     "@storybook/testing-library": "^0.0.14-next.2",
     "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.2.24",
     "@types/styled-components": "^5.1.26",
     "@types/three": "^0.160.0",
     "babel-loader": "^9.1.2",
@@ -38,6 +39,7 @@
     "chromatic": "^10.5.0",
     "lorem-ipsum": "^2.0.8",
     "postcss": "^8.4.21",
+    "prettier": "^3.2.5",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-docgen-typescript": "^2.2.2",
