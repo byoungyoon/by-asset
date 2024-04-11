@@ -1,6 +1,6 @@
 {
   "name": "@byoungyoon/by-asset",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "description": "A Component Library for Building React Applications faster",
   "scripts": {
     "build": "rollup -c",
