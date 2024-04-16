@@ -36,9 +36,10 @@ type Props = {
   color: string;
 
   reset?: number;
+  isResize?: boolean;
 };
 
-export default function Tree({ target, color, reset = 0 }: Props) {
+export default function Tree({ target, color, reset = 0, isResize }: Props) {
   const ref = useRef<HTMLCanvasElement>(null);
 
   const maxDepth = 11;
@@ -98,8 +99,10 @@ export default function Tree({ target, color, reset = 0 }: Props) {
   useEffect(() => {
     handleResize();
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    if (isResize) {
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
   }, []);
 
   useEffect(() => {

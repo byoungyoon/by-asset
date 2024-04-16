@@ -27,6 +27,7 @@ export const Preview: Story = {
   args: {
     color: '#ffc5d0',
     target: 'test',
+    isResize: true,
   },
 
   render: (args) => {
@@ -38,7 +39,7 @@ export const Preview: Story = {
     return (
       <>
         <div id="test" style={{ width: '100%', height: '100dvh' }}>
-          <Tree color={args.color} target={args.target} reset={count} />
+          <Tree color={args.color} target={args.target} reset={count} isResize={args.isResize} />
         </div>
         <button type="button" onClick={onClick}>
           reset
