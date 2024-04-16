@@ -28,7 +28,8 @@ export const Preview: Story = {
     color: '#ffc5d0',
     target: 'test',
     isResize: true,
-    defaultValue: 2,
+    defaultDepth: 11,
+    defaultCount: 3,
   },
 
   render: (args) => {
@@ -45,7 +46,8 @@ export const Preview: Story = {
             target={args.target}
             reset={count}
             isResize={args.isResize}
-            defaultValue={args.defaultValue}
+            defaultDepth={args.defaultDepth}
+            defaultCount={args.defaultCount}
           />
         </div>
         <button type="button" onClick={onClick}>

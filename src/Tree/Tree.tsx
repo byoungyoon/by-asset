@@ -38,13 +38,14 @@ type Props = {
   reset?: number;
   isResize?: boolean;
 
-  defaultValue?: number;
+  defaultDepth?: number;
+  defaultCount?: number;
 };
 
-export default function Tree({ target, color, reset = 0, isResize, defaultValue = 0 }: Props) {
+export default function Tree({ target, color, reset = 0, isResize, defaultDepth = 11, defaultCount = 0 }: Props) {
   const ref = useRef<HTMLCanvasElement>(null);
 
-  const maxDepth = 11;
+  const maxDepth = defaultDepth;
   const currColor = getRGB(color);
 
   const onDraw = (ctx: CanvasRenderingContext2D, start: XY, end: XY, width: number, strokeStyle: string) => {
@@ -86,7 +87,7 @@ export default function Tree({ target, color, reset = 0, isResize, defaultValue 
   const handleDefault = () => {
     const ctx = ref.current?.getContext('2d')!;
 
-    for (let i = 0; i < defaultValue; i++) {
+    for (let i = 0; i < defaultCount; i++) {
       createBranch(ctx, { x: random(0, ctx.canvas.width), y: ctx.canvas.height }, -90, 0);
     }
   };
