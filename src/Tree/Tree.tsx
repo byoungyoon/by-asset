@@ -37,9 +37,11 @@ type Props = {
 
   reset?: number;
   isResize?: boolean;
+
+  defaultValue?: number;
 };
 
-export default function Tree({ target, color, reset = 0, isResize }: Props) {
+export default function Tree({ target, color, reset = 0, isResize, defaultValue = 0 }: Props) {
   const ref = useRef<HTMLCanvasElement>(null);
 
   const maxDepth = 11;
@@ -81,6 +83,14 @@ export default function Tree({ target, color, reset = 0, isResize }: Props) {
     });
   };
 
+  const handleDefault = () => {
+    const ctx = ref.current?.getContext('2d')!;
+
+    for (let i = 0; i < defaultValue; i++) {
+      createBranch(ctx, { x: random(0, ctx.canvas.width), y: ctx.canvas.height }, -90, 0);
+    }
+  };
+
   const handleClick: MouseEventHandler<HTMLCanvasElement> = (event) => {
     const { clientX } = event;
     const ctx = ref.current?.getContext('2d')!;
@@ -98,6 +108,7 @@ export default function Tree({ target, color, reset = 0, isResize }: Props) {
 
   useEffect(() => {
     handleResize();
+    handleDefault();
 
     if (isResize) {
       window.addEventListener('resize', handleResize);
