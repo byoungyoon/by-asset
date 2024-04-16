@@ -1,6 +1,10 @@
-import { forwardRef, useEffect, useRef } from 'react';
+import { forwardRef, MouseEventHandler, useEffect, useRef } from 'react';
 
-const PureCanvas = forwardRef<HTMLCanvasElement>((props, ref) => <canvas ref={ref} style={{ background: '' }} />);
+type PureProps = {
+  onClick?: MouseEventHandler<HTMLCanvasElement>;
+};
+
+const PureCanvas = forwardRef<HTMLCanvasElement, PureProps>((props, ref) => <canvas ref={ref} {...props} />);
 
 const degToRad = (angle: number) => {
   return (angle / 180.0) * Math.PI;
@@ -11,7 +15,9 @@ const random = (min: number, max: number) => {
 };
 
 const getRGB = (HEX: string) => {
-  const arr = HEX.match(/.{2}/g)?.map((replacer) => parseInt(replacer, 16) || 0)!;
+  const arr = HEX.substring(1)
+    .match(/.{2}/g)
+    ?.map((replacer) => parseInt(replacer, 16) || 0)!;
 
   return {
     r: arr[0],
@@ -26,10 +32,13 @@ type XY = {
 };
 
 type Props = {
+  target: string;
   color: string;
+
+  reset?: number;
 };
 
-export default function Tree({ color }: Props) {
+export default function Tree({ target, color, reset = 0 }: Props) {
   const ref = useRef<HTMLCanvasElement>(null);
 
   const maxDepth = 11;
@@ -71,30 +80,31 @@ export default function Tree({ color }: Props) {
     });
   };
 
-  const handleClick = (ctx: CanvasRenderingContext2D) => (event: MouseEvent) => {
+  const handleClick: MouseEventHandler<HTMLCanvasElement> = (event) => {
     const { clientX } = event;
+    const ctx = ref.current?.getContext('2d')!;
 
-    createBranch(ctx, { x: clientX, y: window.innerHeight }, -90, 0);
+    createBranch(ctx, { x: clientX, y: ctx.canvas.height }, -90, 0);
   };
-  const handleResize = (ctx: CanvasRenderingContext2D) => () => {
-    ctx.canvas.width = window.innerWidth;
-    ctx.canvas.height = window.innerHeight;
+  const handleResize = () => {
+    const ctx = ref.current?.getContext('2d')!;
+
+    ctx.canvas.width = document.getElementById(target)?.clientWidth!;
+    ctx.canvas.height = document.getElementById(target)?.clientHeight!;
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   };
 
   useEffect(() => {
-    const ctx = ref.current?.getContext('2d')!;
+    handleResize();
 
-    handleResize(ctx)();
-
-    window.addEventListener('resize', handleResize(ctx));
-    window.addEventListener('click', handleClick(ctx));
-    return () => {
-      window.removeEventListener('resize', handleResize(ctx));
-      window.removeEventListener('click', handleClick(ctx));
-    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  return <PureCanvas ref={ref} />;
+  useEffect(() => {
+    if (reset !== 0) handleResize();
+  }, [reset]);
+
+  return <PureCanvas ref={ref} onClick={handleClick} />;
 }
