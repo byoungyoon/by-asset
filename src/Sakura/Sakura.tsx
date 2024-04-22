@@ -5,16 +5,17 @@ import Petal from './Petal';
 interface SakuraProps {
   children?: ReactNode;
   total?: number;
+  fallSpeed?: number;
 }
 
 export default function Sakura(props: SakuraProps) {
-  const { children, total = 200 } = props;
+  const { children, total = 200, fallSpeed = 1 } = props;
   const ref = useRef<HTMLDivElement>(null);
 
   const maxTotal = Math.min(total, 500);
 
   const options = {
-    fallSpeed: 1,
+    fallSpeed: fallSpeed,
     maxSize: 14,
     minSize: 10,
     delay: 300,

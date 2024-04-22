@@ -1,6 +1,6 @@
 {
   "name": "@byoungyoon/by-asset",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "A Component Library for Building React Applications faster",
   "scripts": {
     "build": "rollup -c",
@@ -36,7 +36,7 @@
     "@types/three": "^0.160.0",
     "babel-loader": "^9.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "chromatic": "^10.5.0",
+    "chromatic": "^10.9.6",
     "lorem-ipsum": "^2.0.8",
     "postcss": "^8.4.21",
     "prettier": "^3.2.5",

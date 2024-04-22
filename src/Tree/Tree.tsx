@@ -40,9 +40,19 @@ type Props = {
 
   defaultDepth?: number;
   defaultCount?: number;
+
+  level?: number;
 };
 
-export default function Tree({ target, color, reset = 0, isResize, defaultDepth = 11, defaultCount = 0 }: Props) {
+export default function Tree({
+  target,
+  color,
+  reset = 0,
+  isResize,
+  defaultDepth = 11,
+  defaultCount = 0,
+  level = 3,
+}: Props) {
   const ref = useRef<HTMLCanvasElement>(null);
 
   const maxDepth = defaultDepth;
@@ -64,7 +74,8 @@ export default function Tree({ target, color, reset = 0, isResize, defaultDepth 
   const createBranch = (ctx: CanvasRenderingContext2D, start: XY, angle: number, depth: number) => {
     if (maxDepth === depth) return;
 
-    const len = depth === 0 ? random(10, 13) : random(0, 11);
+    const len = (depth === 0 ? random(10, 13) : random(0, 11)) * (level / 3);
+
     const end = {
       x: start.x + Math.cos(degToRad(angle)) * len * (maxDepth - depth),
       y: start.y + Math.sin(degToRad(angle)) * len * (maxDepth - depth),
@@ -76,7 +87,7 @@ export default function Tree({ target, color, reset = 0, isResize, defaultDepth 
       b: currColor.b - (currColor.b / maxDepth) * (maxDepth - depth),
     };
 
-    onDraw(ctx, start, end, maxDepth - depth, `rgb(${color.r},${color.g},${color.b})`);
+    onDraw(ctx, start, end, (maxDepth - depth) * (level / 3), `rgb(${color.r},${color.g},${color.b})`);
 
     requestAnimationFrame(() => {
       createBranch(ctx, end, angle - random(15, 23), depth + 1);

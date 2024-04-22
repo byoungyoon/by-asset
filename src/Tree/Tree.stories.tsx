@@ -30,6 +30,7 @@ export const Preview: Story = {
     isResize: true,
     defaultDepth: 11,
     defaultCount: 3,
+    level: 3,
   },
 
   render: (args) => {
@@ -48,6 +49,7 @@ export const Preview: Story = {
             isResize={args.isResize}
             defaultDepth={args.defaultDepth}
             defaultCount={args.defaultCount}
+            level={args.level}
           />
         </div>
         <button type="button" onClick={onClick}>

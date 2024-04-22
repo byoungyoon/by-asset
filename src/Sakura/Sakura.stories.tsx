@@ -12,11 +12,12 @@ export default meta;
 export const Preview: Story = {
   args: {
     total: 200,
+    fallSpeed: 1,
   },
-  render: ({ children }) => {
+  render: (props) => {
     return (
       <div style={{ width: '100%', height: '100dvh' }}>
-        <Sakura />
+        <Sakura {...props} />
       </div>
     );
   },
